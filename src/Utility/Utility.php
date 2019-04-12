@@ -8,13 +8,30 @@ use DateTime;
 
 class Utility
 {
-    const CURRENCY_SYMBOLS = ['EUR' => '€', 'GBP' => '£', 'NGN' => '₦', 'USD' => '$', 'CHF' => 'CHF',
-        'JPY' => '¥', 'CNY' => '¥', 'SAR' => '﷼', 'ZAR' => 'R', 'DKK' => 'kr'];
+    const CURRENCY_SYMBOLS = [
+        'EUR' => '€',
+        'GBP' => '£',
+        'NGN' => '₦',
+        'USD' => '$',
+        'CHF' => 'CHF',
+        'JPY' => '¥',
+        'CNY' => '¥',
+        'SAR' => '﷼',
+        'ZAR' => 'R',
+        'DKK' => 'kr'
+    ];
 
     const CURRENCY_NAMES = [
-        'EUR' => 'EURO', 'GBP' => 'POUNDS STERLING', 'NGN' => 'Nigerian Naira', 'USD' => 'US DOLLAR',
-        'CHF' => 'SWISS FRANC', 'JPY' => 'YEN', 'CNY' => 'YUAN/RENMINBI', 'SAR' => 'RIYAL',
-        'ZAR' => 'SOUTH AFRICAN RAND', 'DKK' => 'DANISH KRONA'
+        'EUR' => 'EURO',
+        'GBP' => 'POUNDS STERLING',
+        'NGN' => 'NIGERIAN NAIRA',
+        'USD' => 'US DOLLAR',
+        'CHF' => 'SWISS FRANC',
+        'JPY' => 'YEN',
+        'CNY' => 'YUAN/RENMINBI',
+        'SAR' => 'RIYAL',
+        'ZAR' => 'SOUTH AFRICAN RAND',
+        'DKK' => 'DANISH KRONA'
     ];
 
     const CBN_EXCHANGE_RATE_URL = 'https://www.cbn.gov.ng/Functions/export.asp?tablename=exchange';
@@ -79,7 +96,9 @@ class Utility
             $exchangeRateObject = new ExchangeRate();
             $exchangeRateArray[] =
                 $exchangeRateObject
-                    ->setDate(DateTime::createFromFormat('n/j/Y', $detailsArray[0], new \DateTimeZone('Africa/Lagos')))
+                    ->setDate(DateTime::createFromFormat(
+                        'n/j/Y', $detailsArray[0],
+                        new \DateTimeZone('Africa/Lagos')))
                     ->setCurrency($this->getCurrencyAbbreviation($detailsArray[1]))
                     ->setYear($detailsArray[2])
                     ->setMonth($detailsArray[3])

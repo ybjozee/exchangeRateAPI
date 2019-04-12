@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ExchangeRate;
 use App\Repository\ExchangeRateRepository;
+use App\Utility\Utility;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ExchangeRateController extends AbstractController
 {
+    /**
+     * @Route("currencies/all", name="get_all_currencies", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getCurrenciesAction()
+    {
+        $responseArray = [];
+        foreach (Utility::CURRENCY_NAMES as $key => $value){
+            $responseArray[$value] = [
+                'abbreviation' => $key,
+                'symbol' => Utility::CURRENCY_SYMBOLS[$key]
+            ];
+        }
+        return $this->json($responseArray);
+    }
+
+
     /**
      * @Route("all/{currency}", name="get_all_exchange_rates", methods={"GET"})
      * @param ExchangeRateRepository $exchangeRateRepository
